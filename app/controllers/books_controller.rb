@@ -6,19 +6,21 @@ class BooksController < ApplicationController
 
   def index
     @books = Book.all
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render xml: @books }
-      format.json { render json: @books }
-    end
+    render json: Book.all
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.xml  { render xml: @books }
+    #   format.json { render json: @books }
+    # end
   end
 
   def show
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render xml: @book }
-      format.json { render json: @book }
-    end
+    render json: @book
+    # respond_to do |format|
+    #   format.html # index.html.erb
+    #   format.xml  { render xml: @book }
+    #   format.json { render json: @book }
+    # end
   end
 
   def new
