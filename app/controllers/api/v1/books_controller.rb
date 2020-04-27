@@ -7,7 +7,6 @@ module Api
       before_action :set_book, only: %i[show edit update destroy]
 
       def index
-        @books = Book.all
         render json: Book.all
         # respond_to do |format|
         #   format.html # index.html.erb
@@ -18,23 +17,23 @@ module Api
 
       def show
         if @book
-          render json: @book
+          render json: { status: 'SUCCESS', message: 'Book successfully loaded',
+                         data: book }, status: :ok
         else
-          render json: @book.errors
+          render json: { status: 'ERROR', message: 'Book could not be loaded',
+                         data: @book.errors }, status: :unprocessable_entity
         end
       end
 
-      def new
-        @book = Book.new
-      end
-
       def create
-        @book = Book.new(book_params)
+        book = Book.new(book_params)
 
-        if @book.save
-          render json: @book
+        if book.save
+          render json: { status: 'SUCCESS', message: 'Book successfully added',
+                         data: book }, status: :ok
         else
-          render json: @book.errors
+          render json: { status: 'ERROR', message: 'Book not added',
+                         data: book.errors }, status: :unprocessable_entity
         end
       end
 
@@ -44,7 +43,8 @@ module Api
 
       def destroy
         @book.destroy
-        render json: { message: 'Book was successfully removed' }
+        render json: { status: 'SUCCESS', message: 'Book was removed',
+                       data: @book }, status: :ok
       end
 
       private
@@ -54,7 +54,8 @@ module Api
         @book = Book.find(params[:id])
       end
 
-      # Never trust parameters from the scary internet, only allow the white list through.
+      # Never trust parameters from the scary internet,
+      # only allow the white list through.
       def book_params
         params.require(:book).permit(:title, :author, :genre)
       end
