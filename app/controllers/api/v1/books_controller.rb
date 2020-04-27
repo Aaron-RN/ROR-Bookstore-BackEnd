@@ -4,7 +4,7 @@ module Api
   module V1
     # Book model
     class BooksController < ApplicationController
-      before_action :set_book, only: %i[show edit update destroy]
+      before_action :set_book, only: %i[show update destroy]
 
       def index
         render json: Book.all
@@ -37,9 +37,15 @@ module Api
         end
       end
 
-      def edit; end
-
-      def update; end
+      def update
+        if @book.update_attributes(book_params)
+          render json: { status: 'SUCCESS', message: 'Book updated',
+                         data: book }, status: :ok
+        else
+          render json: { status: 'ERROR', message: 'Book not updated',
+                         data: book.errors }, status: :unprocessable_entity
+        end
+      end
 
       def destroy
         @book.destroy
