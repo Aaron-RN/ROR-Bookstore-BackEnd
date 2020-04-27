@@ -5,5 +5,5 @@ Rails.application.routes.draw do
       resources :books
     end
   end
-  root 'books#index'
+  root 'api/v1/books#index'
 end
