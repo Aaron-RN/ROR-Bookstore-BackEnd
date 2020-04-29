@@ -32,7 +32,7 @@ module Api
           render json: { status: 'SUCCESS', message: 'Book successfully added',
                          data: book }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Book not added',
+          render json: { status: 'ERROR', message: 'Book could not be added',
                          error: book.errors }, status: :unprocessable_entity
         end
       end
@@ -42,7 +42,7 @@ module Api
           render json: { status: 'SUCCESS', message: 'Book updated',
                          data: book }, status: :ok
         else
-          render json: { status: 'ERROR', message: 'Book not updated',
+          render json: { status: 'ERROR', message: 'Book could not be updated',
                          error: book.errors }, status: :unprocessable_entity
         end
       end
