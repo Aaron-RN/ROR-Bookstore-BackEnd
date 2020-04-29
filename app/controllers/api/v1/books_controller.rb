@@ -21,7 +21,7 @@ module Api
                          data: book }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book could not be loaded',
-                         errors: @book.errors }, status: :unprocessable_entity
+                         error: @book.errors }, status: :unprocessable_entity
         end
       end
 
@@ -33,7 +33,7 @@ module Api
                          data: book }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book not added',
-                         errors: book.errors }, status: :unprocessable_entity
+                         error: book.errors }, status: :unprocessable_entity
         end
       end
 
@@ -43,7 +43,7 @@ module Api
                          data: book }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book not updated',
-                         errors: book.errors }, status: :unprocessable_entity
+                         error: book.errors }, status: :unprocessable_entity
         end
       end
 
