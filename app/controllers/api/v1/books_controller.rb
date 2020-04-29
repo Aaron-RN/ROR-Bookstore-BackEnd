@@ -4,7 +4,7 @@ module Api
   module V1
     # Book model
     class BooksController < ApplicationController
-      # before_action :set_book, only: %i[show update destroy]
+      before_action :set_book, only: %i[show update destroy]
 
       def index
         render json: Book.all
@@ -16,10 +16,9 @@ module Api
       end
 
       def show
-        @book = Book.find(params[:id])
         if @book
           render json: { status: 'SUCCESS', message: 'Book successfully loaded',
-                         data: book }, status: :ok
+                         data: @book }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book could not be loaded',
                          error: @book.errors }, status: :unprocessable_entity
@@ -39,18 +38,16 @@ module Api
       end
 
       def update
-        @book = Book.find(params[:id])
         if @book.update_attributes(book_params)
           render json: { status: 'SUCCESS', message: 'Book updated',
-                         data: book }, status: :ok
+                         data: @book }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book could not be updated',
-                         error: book.errors }, status: :unprocessable_entity
+                         error: @book.errors }, status: :unprocessable_entity
         end
       end
 
       def destroy
-        @book = Book.find(params[:id])
         @book.destroy
         render json: { status: 'SUCCESS', message: 'Book was removed',
                        data: @book }, status: :ok
@@ -58,10 +55,10 @@ module Api
 
       private
 
-      # # Use callbacks to share common setup or constraints between actions.
-      # def set_book
-      #   @book = Book.find(params[:id])
-      # end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_book
+        @book = Book.find(params[:id])
+      end
 
       # Never trust parameters from the scary internet,
       # only allow the white list through.
