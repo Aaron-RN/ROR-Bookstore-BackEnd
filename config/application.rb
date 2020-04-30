@@ -18,7 +18,7 @@ module ReduxBookstoreDatabase
         %i[get post put patch delete options head], credentials: true
       end
       allow do
-        origins 'https://arn-react-redux-bookstore.netlify.app/'
+        origins 'https://arn-bookstore-frontend.herokuapp.com/'
         resource '*', headers: :any, methods:
         %i[get post put patch delete options head], credentials: true
       end
