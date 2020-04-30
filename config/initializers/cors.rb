@@ -7,12 +7,12 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     %i[get post put patch delete options head], credentials: true
   end
   allow do
-    origins 'https://arn-react-redux-bookstore.netlify.app/'
+    origins 'https://arn-react-redux-bookstore.netlify.app'
     resource '*', headers: :any, methods:
     %i[get post put patch delete options head], credentials: true
   end
   allow do
-    origins 'https://arn-bookstore-frontend.herokuapp.com/'
+    origins 'https://arn-bookstore-frontend.herokuapp.com'
     resource '*', headers: :any, methods:
     %i[get post put patch delete options head], credentials: true
   end
