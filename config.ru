@@ -38,6 +38,6 @@ use Rack::Cors do
     resource '/api/v1/*',
         headers: :any,
         methods: %i[get post put patch delete options head],
-        if: proc { |env| env['HTTP_HOST'] == 'api.example.com' }
+        if: proc { |env| env['HTTP_HOST'] == 'https://arn-bookstore-frontend.herokuapp.com/' }
   end
 end
