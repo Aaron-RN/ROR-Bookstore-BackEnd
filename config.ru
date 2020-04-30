@@ -21,7 +21,7 @@ use Rack::Cors do
   end
 
   allow do
-    origins 'https://arn-react-redux-bookstore.netlify.app/'
+    origins '*'
     resource '/public/*', headers: :any, methods: :get
 
     # Only allow a request for a specific host
