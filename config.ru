@@ -4,6 +4,7 @@ require_relative 'config/environment'
 
 run Rails.application
 
+require 'rack/cors'
 use Rack::Cors do
   allow do
     origins 'localhost:3000', '127.0.0.1:3000',
@@ -26,8 +27,8 @@ use Rack::Cors do
     # Only allow a request for a specific host
     resource '/api/v1/*',
         headers: :any,
-        methods: :get,
-        if: proc { |env| env['HTTP_HOST'] == 'api.example.com' }
+        methods: %i[get post put patch delete options head],
+        if: proc { |env| env['HTTP_HOST'] == 'https://arn-react-redux-bookstore.netlify.app/' }
   end
   allow do
     origins 'https://arn-bookstore-frontend.herokuapp.com/'
@@ -36,7 +37,7 @@ use Rack::Cors do
     # Only allow a request for a specific host
     resource '/api/v1/*',
         headers: :any,
-        methods: :get,
+        methods: %i[get post put patch delete options head],
         if: proc { |env| env['HTTP_HOST'] == 'api.example.com' }
   end
 end
