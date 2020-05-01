@@ -7,7 +7,7 @@ module Api
       before_action :set_book, only: %i[show update destroy]
 
       def index
-        render json: Book.all
+        render json: Book.with_comments
         # respond_to do |format|
         #   format.html # index.html.erb
         #   format.xml  { render xml: @books }
@@ -24,7 +24,7 @@ module Api
                          error: @book.errors.full_messages }, status: :unprocessable_entity
         end
       end
-      
+
       def show_comments
         if @book
           render json: { status: 'SUCCESS', message: 'Book successfully loaded',
