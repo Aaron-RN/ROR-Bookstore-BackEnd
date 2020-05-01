@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    # Book model
+    # Books controller
     class BooksController < ApplicationController
       before_action :set_book, only: %i[show update destroy]
 
@@ -22,6 +22,16 @@ module Api
         else
           render json: { status: 'ERROR', message: 'Book could not be loaded',
                          error: @book.errors.full_messages }, status: :unprocessable_entity
+        end
+      end
+      
+      def show_comments
+        if @book
+          render json: { status: 'SUCCESS', message: 'Book successfully loaded',
+                         data: @book.comments }, status: :ok
+        else
+          render json: { status: 'ERROR', message: 'Book could not be loaded',
+                         error: @book.comments.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
