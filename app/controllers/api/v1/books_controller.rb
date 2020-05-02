@@ -41,8 +41,11 @@ module Api
         book = Book.new(book_params)
 
         if book.save
+          book_with_comments = { id: book.id, title: book.title, author: book.author,
+                                 genre: book.genre, comments: book.comments }
+
           render json: { status: 'SUCCESS', message: 'Book successfully added',
-                         data: book }, status: :ok
+                         data: book_with_comments }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book could not be added',
                          error: book.errors.full_messages }, status: :unprocessable_entity
@@ -51,8 +54,11 @@ module Api
 
       def update
         if @book.update(book_params)
+          book_with_comments = { id: @book.id, title: @book.title, author: @book.author,
+                                 genre: @book.genre, comments: @book.comments }
+
           render json: { status: 'SUCCESS', message: 'Book updated',
-                         data: @book }, status: :ok
+                         data: book_with_comments }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book could not be updated',
                          error: @book.errors.full_messages }, status: :unprocessable_entity
