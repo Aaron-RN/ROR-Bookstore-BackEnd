@@ -17,11 +17,13 @@ module Api
 
       def show
         if @book
+          book_with_comment = { id: @book.id, title: @book.title, author: @book.author,
+                                genre: @book.genre, comments: @book.comments }
           render json: { status: 'SUCCESS', message: 'Book successfully loaded',
-                         data: @book }, status: :ok
+                         data: book_with_comment }, status: :ok
         else
           render json: { status: 'ERROR', message: 'Book could not be loaded',
-                         error: @book.errors.full_messages }, status: :unprocessable_entity
+                         error: book_with_comment.errors.full_messages }, status: :unprocessable_entity
         end
       end
 
