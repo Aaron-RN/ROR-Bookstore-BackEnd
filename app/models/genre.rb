@@ -9,7 +9,7 @@ class Genre < ApplicationRecord
     genres = all
     genres_with_ids = []
     genres.each do |g|
-      genre_and_id = { id: g.id, name: g.title }
+      genre_and_id = { id: g.id, name: g.name }
       genres_with_ids << genre_and_id
     end
 
