@@ -7,7 +7,7 @@ module Api
       before_action :set_genre, only: %i[show update destroy]
 
       def index
-        render json: Genre.all
+        render json: Genre.with_id
       end
 
       def create
