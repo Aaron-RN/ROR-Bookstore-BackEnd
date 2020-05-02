@@ -12,7 +12,7 @@ class Book < ApplicationRecord
     books = all
     books_and_comments = []
     books.each do |b|
-      book_with_comment = { title: b.title, author: b.author,
+      book_with_comment = { id: b.id, title: b.title, author: b.author,
                             genre: b.genre, comments: b.comments }
       books_and_comments << book_with_comment
     end
