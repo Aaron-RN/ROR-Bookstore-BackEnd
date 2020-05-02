@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        genre = genre.new(genre_params)
+        genre = Genre.new(genre_params)
 
         if genre.save
           render json: { status: 'SUCCESS', message: 'genre successfully added',
@@ -32,7 +32,7 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_genre
-        @genre = genre.find(params[:id])
+        @genre = Genre.find(params[:id])
       end
 
       # Never trust parameters from the scary internet,
