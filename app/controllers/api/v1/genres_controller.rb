@@ -3,7 +3,7 @@
 module Api
   module V1
     # Genre controller
-    class GenreController < ApplicationController
+    class GenresController < ApplicationController
       before_action :set_genre, only: %i[show update destroy]
 
       def index

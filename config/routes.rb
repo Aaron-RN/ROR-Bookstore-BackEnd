@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :books do
         resources :comments, only: %i[create update destroy]
       end
-      resources :genre, only: %i[index create destroy]
+      resources :genres, only: %i[index create destroy]
     end
   end
   root 'api/v1/books#index'
