@@ -4,7 +4,7 @@ module Api
   module V1
     # Books controller
     class BooksController < ApplicationController
-      before_action :set_book, only: %i[show update destroy]
+      before_action :set_book, only: %i[show show_comments update destroy]
 
       def index
         render json: Book.with_comments
@@ -48,7 +48,7 @@ module Api
       end
 
       def update
-        if @book.update_attributes(book_params)
+        if @book.update(book_params)
           render json: { status: 'SUCCESS', message: 'Book updated',
                          data: @book }, status: :ok
         else

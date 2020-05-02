@@ -7,7 +7,8 @@ module Api
       before_action :set_comment, only: %i[show update destroy]
 
       def create
-        comment = comment.new(comment_params)
+        book = Book.find(params[:book_id])
+        comment = book.comments.new(comment_params)
 
         if comment.save
           render json: { status: 'SUCCESS', message: 'comment successfully added',
@@ -19,7 +20,7 @@ module Api
       end
 
       def update
-        if @comment.update_attributes(comment_params)
+        if @comment.update(comment_params)
           render json: { status: 'SUCCESS', message: 'comment updated',
                          data: @comment }, status: :ok
         else
@@ -38,7 +39,7 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_comment
-        @comment = comment.find(params[:id])
+        @comment = Comment.find(params[:id])
       end
 
       # Never trust parameters from the scary internet,
