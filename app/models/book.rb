@@ -8,6 +8,8 @@ class Book < ApplicationRecord
 
   has_many :comments
 
+  before_destroy :destroy_comments
+
   def self.with_comments
     books = all
     books_and_comments = []
@@ -18,5 +20,11 @@ class Book < ApplicationRecord
     end
 
     books_and_comments
+  end
+
+  private
+
+  def destroy_comments
+    comments.destroy_all
   end
 end
